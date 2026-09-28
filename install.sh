@@ -11,4 +11,7 @@ if ! grep -Fxq "$line" "$HOME/.bashrc"; then
   cp -p "$HOME/.bashrc" "$HOME/.bashrc.before-dotfiles.$(date +%Y%m%d%H%M%S)"
   printf '\n%s\n' "$line" >> "$HOME/.bashrc"
 fi
+if ! command -v claude >/dev/null 2>&1 && [ ! -x "$HOME/.local/bin/claude" ]; then
+  curl -fsSL https://claude.ai/install.sh | bash
+fi
 printf 'Dotfiles installed. Open a new shell to load aliases.\n'
